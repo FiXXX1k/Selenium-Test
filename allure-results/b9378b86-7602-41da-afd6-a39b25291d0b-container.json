@@ -1,0 +1,1 @@
+{"uuid":"b9378b86-7602-41da-afd6-a39b25291d0b","name":"TestShopOfPhones","children":["374e9c79-4cbe-4692-a9b4-d3b7c833784d"],"befores":[{"name":"setupDriver","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1680533638728,"stop":1680533640578}],"afters":[],"start":1680533638693,"stop":1680533640690}
