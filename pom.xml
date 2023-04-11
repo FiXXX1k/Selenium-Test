@@ -11,13 +11,13 @@
 
     <properties>
         <!-- PROJECT -->
-        <java.version>19</java.version>
+        <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <!-- MAVEN -->
         <maven-compiler-plugin>3.8.1</maven-compiler-plugin>
-        <maven-surefire-plugin>3.0.0-M5</maven-surefire-plugin>
+        <maven-surefire-plugin.version>3.0.0-M7</maven-surefire-plugin.version>
 
         <!-- DEPENDENCIES -->
         <!-- selenium -->
@@ -35,6 +35,11 @@
         <aspectj.version>1.9.7</aspectj.version>
         <allure.version>2.17.3</allure.version>
         <allure-maven-plugin.version>2.11.2</allure-maven-plugin.version>
+        <maven-resources-plugin.version>3.0.2</maven-resources-plugin.version>
+        <maven-clean-plugin.version>3.1.0</maven-clean-plugin.version>
+        <allure-maven.version>2.10.0</allure-maven.version>
+        <allure-maven-reporter.version>2.17.3</allure-maven-reporter.version>
+        <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
 
     </properties>
 
@@ -78,23 +83,34 @@
     </dependencies>
 
     <build>
+        <testResources>
+            <testResource>
+                <directory>src/test/resources</directory>
+                <filtering>false</filtering>
+            </testResource>
+        </testResources>
+
         <plugins>
             <plugin>
-                <!-- плагин для сборки проекта -->
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>${maven-compiler-plugin}</version>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>${maven-resources-plugin.version}</version>
                 <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
+                    <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
 
             <plugin>
-                <!-- плагин для генерации отчетов -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>${maven-clean-plugin.version}</version>
+            </plugin>
+
+            <plugin>
+                <!-- плагин для генерации отчетов/параметризованного запуска maven -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>${maven-surefire-plugin}</version>
+                <version>3.0.0-M7</version>
                 <configuration>
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
@@ -111,13 +127,23 @@
             </plugin>
 
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
                 <!-- плагин для сборки отчета allure -->
                 <groupId>io.qameta.allure</groupId>
                 <artifactId>allure-maven</artifactId>
-                <version>${allure-maven-plugin.version}</version>
+                <version>${allure-maven.version}</version>
                 <configuration>
-                    <propertiesFilePath>src/main/resources/allure.properties</propertiesFilePath>
-                    <reportVersion>${allure.version}</reportVersion>
+                    <propertiesFilePath>resources/allure.properties</propertiesFilePath>
+                    <reportVersion>${allure-maven-reporter.version}</reportVersion>
                 </configuration>
             </plugin>
         </plugins>
@@ -129,7 +155,11 @@
             <plugin>
                 <groupId>io.qameta.allure</groupId>
                 <artifactId>allure-maven</artifactId>
-                <version>${allure-maven-plugin.version}</version>
+                <configuration>
+                    <allureDownloadUrl>
+                        https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/%s/allure-commandline-%s.zip
+                    </allureDownloadUrl>
+                </configuration>
             </plugin>
         </plugins>
     </reporting>

@@ -1,3 +1,5 @@
+import ConfingsAndHelpers.Assertions;
+import ConfingsAndHelpers.WebDriverSetup;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -7,9 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-
-
-import static org.openqa.selenium.Keys.*;
+import static org.openqa.selenium.Keys.ENTER;
 
 public class ToolsQATest extends WebDriverSetup {
 
@@ -35,9 +35,9 @@ public class ToolsQATest extends WebDriverSetup {
     @FindBy(xpath = "//span[@id = 'edit-record-1']")
     WebElement editingButton;
     @FindBy(xpath = "//input[@class = ' mr-sm-2 form-control']")
-     WebElement firstNameLine2;
+    WebElement firstNameLine2;
     @FindBy(xpath = "//button[@class = 'btn btn-primary']")
-     WebElement editionSubmitButton;
+    WebElement editionSubmitButton;
     @FindBy(xpath = "//button[@class = 'close']")
     WebElement closeButton;
     @FindBy(xpath = "//span[@id = 'delete-record-2']")
@@ -47,19 +47,19 @@ public class ToolsQATest extends WebDriverSetup {
     @FindBy(xpath = "//input[@id = 'password']")
     WebElement password;
     @FindBy(xpath = "//button[@id = 'login']")
-     WebElement loginButton;
+    WebElement loginButton;
     @FindBy(xpath = "//*[@class = 'text' and text() = 'Login']")
     WebElement loginButSelection;
     @FindBy(xpath = "//div[text() = 'Book Store Application']")
     WebElement bookStore;
     @FindBy(xpath = "//div[text() = 'Elements']")
-     WebElement elements;
+    WebElement elements;
     @FindBy(xpath = "//*[@class = 'text' and text() = 'Book Store']")
-      WebElement bookStoreButton;
-    @FindBy (xpath = "//input[@id = 'searchBox']")
+    WebElement bookStoreButton;
+    @FindBy(xpath = "//input[@id = 'searchBox']")
     WebElement bookSearch;
     @FindBy(xpath = "//a[@href = '/books?book=9781449325862']")
-     WebElement bookLink;
+    WebElement bookLink;
 
     ToolsQATest mainPage;
 
@@ -67,11 +67,10 @@ public class ToolsQATest extends WebDriverSetup {
     public void initPage() {
         WebDriverSetup.getDriverInstance().get("https://demoqa.com/checkbox");
         mainPage = PageFactory.initElements(WebDriverSetup.getDriverInstance(), ToolsQATest.class);
-
     }
 
     @Test(priority = 2)
-    public void WebTablesElementsTest()  {
+    public void WebTablesElementsTest() {
         mainPage.WebTablesButton.click();
         mainPage.addButton.click();
         mainPage.firstNameLine.click();
@@ -100,14 +99,10 @@ public class ToolsQATest extends WebDriverSetup {
                 WebDriverSetup.getDriverInstance().findElement(By.xpath("//div[text() = 'John']"));
         Assert.assertTrue(Assertions.isDisplayed(element2));
         mainPage.deleteButton.click();
-         Assertions.elementNotAttachedToPage(By.xpath("//div[text() = 'Alden']"));
-
-
-
-
+        Assertions.elementNotAttachedToPage(By.xpath("//div[text() = 'Alden']"));
     }
 
-    @Test (priority = 3)
+    @Test(priority = 3)
     public void notAutorizationTest() throws InterruptedException {
         JavascriptExecutor jse = (JavascriptExecutor) getDriverInstance();
         jse.executeScript("window.scrollBy(0,250)");
@@ -126,10 +121,9 @@ public class ToolsQATest extends WebDriverSetup {
                 WebDriverSetup.getDriverInstance().
                         findElement(By.xpath("//*[text() = 'Invalid username or password!']"));
         Assertions.checkText(error, "Invalid username or password!");
-
     }
 
-    @Test (priority = 4)
+    @Test(priority = 4)
     public void autorizationTest() throws InterruptedException {
         mainPage.userName.clear();
         mainPage.userName.sendKeys("Timophone");
@@ -141,10 +135,9 @@ public class ToolsQATest extends WebDriverSetup {
         WebElement element3 =
                 WebDriverSetup.getDriverInstance().findElement(By.xpath("//div[@class = 'main-header']"));
         Assert.assertTrue(Assertions.isDisplayed(element3));
-
     }
 
-    @Test (priority = 5)
+    @Test(priority = 5)
     public void testBookStore() throws InterruptedException {
         JavascriptExecutor jse = (JavascriptExecutor) getDriverInstance();
         jse.executeScript("window.scrollBy(0,250)");
@@ -160,9 +153,7 @@ public class ToolsQATest extends WebDriverSetup {
         WebElement element5 =
                 WebDriverSetup.getDriverInstance().findElement(By.xpath("//*[text() = 'Git Pocket Guide']"));
         Assert.assertTrue(Assertions.isDisplayed(element5));
-
     }
-
 }
 
 
