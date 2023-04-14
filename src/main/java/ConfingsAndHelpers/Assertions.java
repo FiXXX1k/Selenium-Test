@@ -47,6 +47,7 @@ public class Assertions {
     public static void visibilityOfAllElementLocated(By webElement) {
         WaitT.wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(webElement));
     }
+
 }
 
 

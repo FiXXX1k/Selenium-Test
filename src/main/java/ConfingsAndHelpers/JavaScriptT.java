@@ -38,4 +38,6 @@ public class JavaScriptT {
         String script = "return document.documentElement.innerText";
         return ((JavascriptExecutor)getDriverInstance()).executeScript(script, getDriverInstance().findElement(By.xpath(locator))).toString();
     }
+
+
 }

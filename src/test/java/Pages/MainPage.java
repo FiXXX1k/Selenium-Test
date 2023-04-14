@@ -23,6 +23,11 @@ public class MainPage extends BasePage {
     public WebElement bookStore;
     @FindBy(xpath = "//*[@class = 'text' and text() = 'Book Store']")
     public WebElement bookStoreButton;
+    @FindBy(xpath = "//div[text() = 'Interactions']")
+    public WebElement interactionsBtn;
+    @FindBy(xpath = "//*[@class = 'text' and text() = 'Droppable']")
+    public WebElement droppable;
+
 
     /**
      * метод для осуществления нажатия кнопки открытия элементов находящихся в разделе "Elements"
@@ -57,5 +62,13 @@ public class MainPage extends BasePage {
      */
     public void clickBookStoreBtn() {
         bookStoreButton.click();
+    }
+
+    public void clickInteractionsBtn() {
+        interactionsBtn.click();
+    }
+
+    public void clickDroppableBtn() {
+        droppable.click();
     }
 }

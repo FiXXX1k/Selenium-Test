@@ -4,12 +4,15 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.Duration;
 
 import static ConfingsAndHelpers.WebDriverSetup2.getDriverInstance;
 
 public class WaitT {
+    private static final Logger log = LoggerFactory.getLogger(WaitT.class);
     protected static WebDriverWait wait;
 
     /**
@@ -84,5 +87,13 @@ public class WaitT {
 
     public static boolean isElementDisplayed(By webElement) {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(webElement)).isDisplayed();
+    }
+
+    public static void littleWait(int ms) {
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException  e) {
+            log.error("Явно указанное ожидание завершилось аварийно!");
+        }
     }
 }
