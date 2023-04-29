@@ -48,6 +48,8 @@ public class Assertions {
         WaitT.wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(webElement));
     }
 
+
+
 }
 
 

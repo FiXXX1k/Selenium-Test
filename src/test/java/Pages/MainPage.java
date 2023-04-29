@@ -27,6 +27,12 @@ public class MainPage extends BasePage {
     public WebElement interactionsBtn;
     @FindBy(xpath = "//*[@class = 'text' and text() = 'Droppable']")
     public WebElement droppable;
+    @FindBy(xpath = "//*[@class = 'text' and text() = 'Radio Button']")
+    public WebElement radioButton;
+    @FindBy(xpath = "//*[@class = 'text' and text() = 'Buttons']")
+    public WebElement buttonsButton;
+    @FindBy(xpath = "//*[@class = 'text' and text() = 'Links']")
+    public WebElement buttonLinks;
 
 
     /**
@@ -70,5 +76,16 @@ public class MainPage extends BasePage {
 
     public void clickDroppableBtn() {
         droppable.click();
+    }
+
+    public void clickButtonsBtn(){
+        buttonsButton.click();
+    }
+    public void clickRadioBtn(){
+        radioButton.click();
+    }
+
+    public void clickLinksBtn(){
+        buttonLinks.click();
     }
 }
